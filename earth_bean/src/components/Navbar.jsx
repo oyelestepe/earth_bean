@@ -6,6 +6,7 @@ import { updateQuantity } from '../store/cartSlice';
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showCart, setShowCart] = useState(false);
+  const [modalProduct, setModalProduct] = useState(null); // Track product for removal confirmation
   const cartRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -15,6 +16,12 @@ function Navbar() {
   );
   const cartProducts = useSelector(state =>
     state.cart.products.filter(p => p.quantity > 0)
+  );
+
+  // Calculate total balance
+  const totalBalance = cartProducts.reduce(
+    (sum, p) => sum + (p.price || 0) * p.quantity,
+    0
   );
 
   useEffect(() => {
@@ -37,6 +44,26 @@ function Navbar() {
     }
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showCart]);
+
+  // Modal handlers
+  const handleMinusClick = (product) => {
+    if (product.quantity === 1) {
+      setModalProduct(product);
+    } else {
+      dispatch(updateQuantity({ id: product.id, delta: -1 }));
+    }
+  };
+
+  const handleConfirmRemove = () => {
+    if (modalProduct) {
+      dispatch(updateQuantity({ id: modalProduct.id, delta: -1 }));
+      setModalProduct(null);
+    }
+  };
+
+  const handleCancelRemove = () => {
+    setModalProduct(null);
+  };
 
   return (
     <nav className={isScrolled ? 'navbar transparent' : 'navbar'}>
@@ -97,26 +124,99 @@ function Navbar() {
             {cartProducts.length === 0 ? (
               <p style={{margin: 0}}>Your cart is empty.</p>
             ) : (
-              <ul className="cart-dropdown-list">
-                {cartProducts.map(product => (
-                  <li key={product.id} className="cart-dropdown-item">
-                    <img src={product.image} alt={product.name} width={40} />
-                    <span className="cart-dropdown-name">{product.name}</span>
-                    <div className="cart-dropdown-qty">
-                      <button
-                        onClick={() => dispatch(updateQuantity({ id: product.id, delta: -1 }))}
-                        className="cart-dropdown-btn"
-                      >-</button>
-                      <span>{product.quantity}</span>
-                      <button
-                        onClick={() => dispatch(updateQuantity({ id: product.id, delta: 1 }))}
-                        className="cart-dropdown-btn"
-                      >+</button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <>
+                <ul className="cart-dropdown-list">
+                  {cartProducts.map(product => (
+                    <li key={product.id} className="cart-dropdown-item">
+                      <img src={product.image} alt={product.name} width={40} />
+                      <span className="cart-dropdown-name">{product.name}</span>
+                      <div className="cart-dropdown-qty">
+                        <button
+                          onClick={() => handleMinusClick(product)}
+                          className="cart-dropdown-btn"
+                        >-</button>
+                        <span>{product.quantity}</span>
+                        <button
+                          onClick={() => dispatch(updateQuantity({ id: product.id, delta: 1 }))}
+                          className="cart-dropdown-btn"
+                        >+</button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                {/* Total balance */}
+                <div
+                  style={{
+                    borderTop: '1px solid #eee',
+                    marginTop: 12,
+                    paddingTop: 12,
+                    textAlign: 'right',
+                    fontWeight: 'bold',
+                    fontSize: 16
+                  }}
+                >
+                  Total: ${totalBalance.toFixed(2)}
+                </div>
+              </>
             )}
+          </div>
+        )}
+        {/* Modal for confirming removal */}
+        {modalProduct && (
+          <div
+            style={{
+              position: 'fixed',
+              top: 0, left: 0, right: 0, bottom: 0,
+              background: 'rgba(0,0,0,0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 2000
+            }}
+          >
+            <div
+              style={{
+                background: '#fff',
+                borderRadius: 10,
+                padding: 32,
+                boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
+                minWidth: 320,
+                textAlign: 'center'
+              }}
+            >
+              <h4 style={{marginTop: 0}}>Remove Item?</h4>
+              <p>Are you sure you want to remove <b>{modalProduct.name}</b> from your cart?</p>
+              <div style={{marginTop: 24, display: 'flex', justifyContent: 'center', gap: 16}}>
+                <button
+                  onClick={handleConfirmRemove}
+                  style={{
+                    background: '#73472e',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: 6,
+                    padding: '8px 20px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Remove
+                </button>
+                <button
+                  onClick={handleCancelRemove}
+                  style={{
+                    background: '#eee',
+                    color: '#73472e',
+                    border: 'none',
+                    borderRadius: 6,
+                    padding: '8px 20px',
+                    fontWeight: 'bold',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>

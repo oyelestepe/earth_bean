@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './componentCss/Navbar.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateQuantity } from '../store/cartSlice';
+import { useNavigate } from 'react-router-dom'
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -10,6 +11,7 @@ function Navbar() {
   const cartRef = useRef(null);
   const dispatch = useDispatch();
 
+  const navigate = useNavigate('/cart');
   // Get total quantity from Redux
   const totalItems = useSelector(state =>
     state.cart.products.reduce((sum, p) => sum + p.quantity, 0)
@@ -89,8 +91,8 @@ function Navbar() {
           {totalItems > 0 && (
             <span style={{
               position: 'absolute',
-              top: 0,
-              right: 0,
+              top: '3px',
+              right: '-10px',
               background: '#73472e',
               color: '#fff',
               borderRadius: '50%',
@@ -144,18 +146,14 @@ function Navbar() {
                     </li>
                   ))}
                 </ul>
+                <div className='cart-total-container'>
+                <div className='go-to-cart'>
+                  <button className='go-to-cart-btn' onClick={()=> navigate("/cart")}>Go to Cart</button>
+                </div>
                 {/* Total balance */}
-                <div
-                  style={{
-                    borderTop: '1px solid #eee',
-                    marginTop: 12,
-                    paddingTop: 12,
-                    textAlign: 'right',
-                    fontWeight: 'bold',
-                    fontSize: 16
-                  }}
-                >
+                <div className='total-balance'>
                   Total: ${totalBalance.toFixed(2)}
+                </div>
                 </div>
               </>
             )}
@@ -163,56 +161,17 @@ function Navbar() {
         )}
         {/* Modal for confirming removal */}
         {modalProduct && (
-          <div
-            style={{
-              position: 'fixed',
-              top: 0, left: 0, right: 0, bottom: 0,
-              background: 'rgba(0,0,0,0.3)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 2000
-            }}
-          >
-            <div
-              style={{
-                background: '#fff',
-                borderRadius: 10,
-                padding: 32,
-                boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
-                minWidth: 320,
-                textAlign: 'center'
-              }}
-            >
+          <div className='modal-overlay'>
+            <div className='modal-content'>
               <h4 style={{marginTop: 0}}>Remove Item?</h4>
               <p>Are you sure you want to remove <b>{modalProduct.name}</b> from your cart?</p>
-              <div style={{marginTop: 24, display: 'flex', justifyContent: 'center', gap: 16}}>
-                <button
-                  onClick={handleConfirmRemove}
-                  style={{
-                    background: '#73472e',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: 6,
-                    padding: '8px 20px',
-                    fontWeight: 'bold',
-                    cursor: 'pointer'
-                  }}
-                >
+              <div className='' style={{marginTop: 24, display: 'flex', justifyContent: 'center', gap: 16}}>
+                <button className='remove-btn'
+                  onClick={handleConfirmRemove}>
                   Remove
                 </button>
-                <button
-                  onClick={handleCancelRemove}
-                  style={{
-                    background: '#eee',
-                    color: '#73472e',
-                    border: 'none',
-                    borderRadius: 6,
-                    padding: '8px 20px',
-                    fontWeight: 'bold',
-                    cursor: 'pointer'
-                  }}
-                >
+                <button className='cancel-btn'
+                  onClick={handleCancelRemove}>
                   Cancel
                 </button>
               </div>

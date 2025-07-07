@@ -1,19 +1,149 @@
 @import url('https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&display=swap');
 
 .navbar {
-    font-size: 20px;
-    font-weight: bold;
-    background-color: #FAF5ED;
-    color: rgb(199, 126, 58);
-    padding: 20px;
-    text-align: center;
-    font-family: 'Delius Swash Caps', cursive;
-    position: sticky;
-    top: 0;
-    transition: background-color 0.3s ease;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #FAF5ED;
+  color: rgb(199, 126, 58);
+  padding: 20px;
+  text-align: center;
+  font-family: 'Delius Swash Caps', cursive;
+  position: sticky;
+  top: 0;
+  transition: background-color 0.3s ease;
+  z-index: 1;
 }
 
 .navbar.transparent {
-    background-color: rgba(250, 245, 237, 0.3); /* Transparan arka plan */
-    backdrop-filter: blur(6px); /* Hafif bulanıklık efekti (isteğe bağlı) */
+  background-color: rgba(250, 245, 237, 0.3); 
+  backdrop-filter: blur(6px);
+}
+
+.cart-dropdown-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-dropdown-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.cart-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.cart-dropdown-item img {
+  border-radius: 6px;
+  margin-right: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.cart-dropdown-name {
+  flex: 1;
+  font-size: 1rem;
+  color: #73472e;
+}
+
+.cart-dropdown-qty {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cart-dropdown-btn {
+  background: #693b0f;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.cart-dropdown-btn:hover {
+  background: #5a320c;
+}
+
+.cart-total-container{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.go-to-cart-btn{
+  background:none;
+  border: none;
+  color: #73472e;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 12px;
+  padding-top: 12px;
+}
+
+.total-balance{
+  margin-top: 12px;
+  padding-top: 12px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* MODAL */
+
+.modal-overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content{
+  background: #fff;
+  padding: 32px;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  min-width: 320px;
+  text-align: center;
+}
+
+.remove-btn {
+  background: #73472e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancel-btn{
+  background:#eee;
+  color: #73472e;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-weight: bold;
+  cursor: pointer;
 }

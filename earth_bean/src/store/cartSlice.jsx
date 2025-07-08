@@ -22,7 +22,7 @@ const cartSlice = createSlice({
       const { id, delta } = action.payload;
       const product = state.products.find(p => p.id === id);
       if (product) {
-        product.quantity = Math.max(1, product.quantity + delta);
+        product.quantity = Math.max(0, product.quantity + delta);
       }
     }
   }

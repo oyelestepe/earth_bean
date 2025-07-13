@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCart } from './store/cartSlice'
 import { useNavigate } from 'react-router-dom'
+import Footer from './components/Footer'
 
 function Hompage() {
   const products = useSelector(state => state.cart.products);
@@ -100,7 +101,7 @@ function Hompage() {
       <h2>lorem ipsum dollar</h2>
       <img src='coffee-cup.png' alt='coffee cup' />
   </div>
-
+<Footer />
   </div>
 )
 }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './pagesCss/Register.css';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +26,8 @@ const Register = () => {
   };
 
   return (
+    <>
+      <Navbar />
     <div className="register-container">
       <h2>Register</h2>
       <form onSubmit={handleSubmit} className="register-form">
@@ -78,6 +82,8 @@ const Register = () => {
         <button type="submit" className='register-btn'>Register</button>
       </form>
     </div>
+    <Footer />
+    </>
   );
 };
 

@@ -1,7 +1,11 @@
 import React from 'react'
 import './pagesCss/Login.css'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 function Login() {
   return (
+    <>
+      <Navbar />
     <div className='login-container'>
         <h2>Login</h2>
         <form className='login-form'>
@@ -17,6 +21,8 @@ function Login() {
             <p className='register-link'> Don't have an account? <a href='/register'><strong>Register here</strong></a></p>
         </form>           
     </div>
+    <Footer />
+    </>
   )
 }
 

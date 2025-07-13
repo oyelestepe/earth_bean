@@ -3,6 +3,8 @@ import './componentCss/Navbar.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateQuantity } from '../store/cartSlice';
 import { useNavigate } from 'react-router-dom'
+import { BsCart2 } from "react-icons/bs";
+import { FaRegUser } from "react-icons/fa";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -71,23 +73,9 @@ function Navbar() {
     <nav className={isScrolled ? 'navbar transparent' : 'navbar'}>
       Earth & Bean
       <div style={{ position: 'absolute', right: 30, top: 20 }}>
-        <button
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            position: 'relative',
-            outline: 'none'
-          }}
-          onClick={() => setShowCart(!showCart)}
-          aria-label="Cart"
-        >
-          {/* Simple cart SVG icon */}
-          <svg width="32" height="32" fill="none" stroke="#73472e" strokeWidth="2" viewBox="0 0 24 24">
-            <circle cx="9" cy="21" r="1.5"/>
-            <circle cx="19" cy="21" r="1.5"/>
-            <path d="M2 2h2l3.6 7.59a2 2 0 0 0 1.7 1.16l9.72.25a2 2 0 0 0 1.98-1.73l1.1-7.27H6"/>
-          </svg>
+        <button className='cart-icon-btn'
+          onClick={() => setShowCart(!showCart)} aria-label="Cart">
+          <BsCart2 className='cart-icon'/>
           {totalItems > 0 && (
             <span style={{
               position: 'absolute',
@@ -103,6 +91,9 @@ function Navbar() {
               {totalItems}
             </span>
           )}
+        </button>
+        <button className='user-icon-btn'>
+          <FaRegUser className='user-icon' onClick={() => navigate('/login')} />
         </button>
         {/* Cart dropdown */}
         {showCart && (

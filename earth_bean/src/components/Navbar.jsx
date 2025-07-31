@@ -71,7 +71,8 @@ function Navbar() {
 
   return (
     <nav className={isScrolled ? 'navbar transparent' : 'navbar'}>
-      Earth & Bean
+    <a href="/" className='text-xl'>Earth & Bean</a>
+      
       <div style={{ position: 'absolute', right: 30, top: 20 }}>
         <button className='cart-icon-btn'
           onClick={() => setShowCart(!showCart)} aria-label="Cart">

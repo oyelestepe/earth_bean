@@ -7,13 +7,15 @@
   color: rgb(199, 126, 58);
   padding: 20px;
   text-align: center;
-  font-family: 'Delius Swash Caps', cursive;
   position: sticky;
   top: 0;
   transition: background-color 0.3s ease;
   z-index: 1;
 }
 
+nav a {
+  font-family: 'Delius Swash Caps', cursive;
+}
 .navbar.transparent {
   background-color: rgba(250, 245, 237, 0.3); 
   backdrop-filter: blur(6px);
@@ -146,4 +148,46 @@
   padding: 8px 20px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.cart-icon-btn {
+  background: none;
+  border: none;
+  color: #73472e;
+  cursor: pointer;
+  padding: 2px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  position: relative;
+  outline: none;
+}
+
+.cart-icon{
+  height: 60px;
+  width: 40px;
+  color: #73472e;
+  cursor: pointer;
+  padding: 2px 7px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.user-icon-btn {
+  background: none;
+  border: none;
+  color: #73472e;
+  cursor: pointer;
+  padding: 2px 7px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.user-icon {
+  height: 55px;
+  width: 35px;
+  color: #73472e;
+  cursor: pointer;
+  padding: 2px 7px;
+  font-size: 12px;
+  font-weight: bold;
 }

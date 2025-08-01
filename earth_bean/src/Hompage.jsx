@@ -24,7 +24,7 @@ function Hompage() {
               <h2>Sustainably sourced coffee rooted in tradition and taste.</h2>
           </div>
           <div className='hero-image'>
-              <img src='hero-img.png' alt='hero' />
+              <img src='/hero-img.png' alt='hero' />
           </div>
       </div>
 
@@ -36,7 +36,7 @@ function Hompage() {
     et turpis auctor, tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   </p>
 </div>
-<img className="about-splash-img" src="coffee-splash2.png" alt="coffee splash" />
+<img className="about-splash-img" src="/coffee-splash2.png" alt="coffee splash" />
   </div>
 
   {/* PRODUCTS */}
@@ -71,7 +71,7 @@ function Hompage() {
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut tempor enim, non dictum quam. Nulla ut vehicula risus. Phasellus non neque pretium, condimentum ante id, lobortis eros. Mauris vestibulum.</p>
               </div>
               <div className='process-image'>
-                  <img src='process1.jpg' alt='process' />
+                  <img src='/process1.jpg' alt='process' />
               </div>
           </div>
 
@@ -81,7 +81,7 @@ function Hompage() {
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut tempor enim, non dictum quam. Nulla ut vehicula risus. Phasellus non neque pretium, condimentum ante id, lobortis eros. Mauris vestibulum.</p>
               </div>
               <div className='process-image'>
-                  <img src='process2.jpg' alt='process' />
+                  <img src='/process2.jpg' alt='process' />
               </div>
           </div>
 
@@ -91,7 +91,7 @@ function Hompage() {
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut tempor enim, non dictum quam. Nulla ut vehicula risus. Phasellus non neque pretium, condimentum ante id, lobortis eros. Mauris vestibulum.</p>
               </div>
               <div className='process-image'>
-                  <img src='process3.png' alt='process' />
+                  <img src='/process3.png' alt='process' />
               </div>
           </div>
       </div>
@@ -99,7 +99,7 @@ function Hompage() {
 
   <div className=''>
       <h2>lorem ipsum dollar</h2>
-      <img src='coffee-cup.png' alt='coffee cup' />
+      <img src='/coffee-cup.png' alt='coffee cup' />
   </div>
 <Footer />
   </div>

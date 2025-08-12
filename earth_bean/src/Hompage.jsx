@@ -12,7 +12,6 @@ function Homepage() {
 
   const handleAddToCart = (id) => {
     dispatch(addToCart(id));
-    navigate('/cart');
   };
 
   const processRef = useRef([]);

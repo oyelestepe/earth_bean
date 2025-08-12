@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './componentCss/Navbar.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateQuantity } from '../store/cartSlice';
+import { updateQuantity, setCartOpen } from '../store/cartSlice';
 import { useNavigate } from 'react-router-dom'
 import { BsCart2 } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
+import Cart from './Cart';
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showCart, setShowCart] = useState(false);
-  const [modalProduct, setModalProduct] = useState(null); // Track product for removal confirmation
+  const [modalProduct, setModalProduct] = useState(null);
   const cartRef = useRef(null);
   const dispatch = useDispatch();
-
   const navigate = useNavigate('/cart');
+
   // Get total quantity from Redux
   const totalItems = useSelector(state =>
     state.cart.products.reduce((sum, p) => sum + p.quantity, 0)
@@ -21,12 +21,12 @@ function Navbar() {
   const cartProducts = useSelector(state =>
     state.cart.products.filter(p => p.quantity > 0)
   );
-
-  // Calculate total balance
   const totalBalance = cartProducts.reduce(
     (sum, p) => sum + (p.price || 0) * p.quantity,
     0
   );
+
+  const cartOpen = useSelector(state => state.cart.cartOpen);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,18 +36,18 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close cart dropdown when clicking outside
+  // Cart dropdown dışına tıklayınca kapat
   useEffect(() => {
     function handleClickOutside(event) {
       if (cartRef.current && !cartRef.current.contains(event.target)) {
-        setShowCart(false);
+        dispatch(setCartOpen(false));
       }
     }
-    if (showCart) {
+    if (cartOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [showCart]);
+  }, [cartOpen, dispatch]);
 
   // Modal handlers
   const handleMinusClick = (product) => {
@@ -69,13 +69,23 @@ function Navbar() {
     setModalProduct(null);
   };
 
+  const selectedProducts = useSelector(state => state.cart.products);
+  const filteredProducts = useMemo(
+    () => selectedProducts.filter(p => p.quantity > 0),
+    [selectedProducts]
+  );
+
+  // Cart ikonuna tıklayınca:
+  const handleCartClick = () => {
+    dispatch(setCartOpen(!cartOpen));
+  };
+
   return (
     <nav className={isScrolled ? 'navbar transparent' : 'navbar'}>
-    <a href="/" className='text-xl'>Earth & Bean</a>
-      
+      <a href="/" className='text-xl'>Earth & Bean</a>
       <div style={{ position: 'absolute', right: 30, top: 20 }}>
         <button className='cart-icon-btn'
-          onClick={() => setShowCart(!showCart)} aria-label="Cart">
+          onClick={handleCartClick} aria-label="Cart">
           <BsCart2 className='cart-icon'/>
           {totalItems > 0 && (
             <span style={{
@@ -97,7 +107,7 @@ function Navbar() {
           <FaRegUser className='user-icon' onClick={() => navigate('/login')} />
         </button>
         {/* Cart dropdown */}
-        {showCart && (
+        {cartOpen && (
           <div
             ref={cartRef}
             className="cart-dropdown"
@@ -115,12 +125,12 @@ function Navbar() {
             }}
           >
             <h3 style={{margin: 0, marginBottom: 12}}>Cart</h3>
-            {cartProducts.length === 0 ? (
+            {filteredProducts.length === 0 ? (
               <p style={{margin: 0}}>Your cart is empty.</p>
             ) : (
               <>
                 <ul className="cart-dropdown-list">
-                  {cartProducts.map(product => (
+                  {filteredProducts.map(product => (
                     <li key={product.id} className="cart-dropdown-item">
                       <img src={product.image} alt={product.name} width={40} />
                       <span className="cart-dropdown-name">{product.name}</span>
@@ -139,13 +149,12 @@ function Navbar() {
                   ))}
                 </ul>
                 <div className='cart-total-container'>
-                <div className='go-to-cart'>
-                  <button className='go-to-cart-btn' onClick={()=> navigate("/cart")}>Go to Cart</button>
-                </div>
-                {/* Total balance */}
-                <div className='total-balance'>
-                  Total: ${totalBalance.toFixed(2)}
-                </div>
+                  <div className='go-to-cart'>
+                    <button className='go-to-cart-btn' onClick={()=> navigate("/cart")}>Go to Cart</button>
+                  </div>
+                  <div className='total-balance'>
+                    Total: ${totalBalance.toFixed(2)}
+                  </div>
                 </div>
               </>
             )}

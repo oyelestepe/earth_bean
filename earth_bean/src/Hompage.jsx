@@ -1,11 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from './store/cartSlice';
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from './components/LoadingSpinner';
 
 function Homepage() {
+  const [isLoading, setIsLoading] = useState(true); // loading state
   const products = useSelector(state => state.cart.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,6 +17,12 @@ function Homepage() {
   };
 
   const processRef = useRef([]);
+
+  useEffect(() => {
+    // Simulate loading
+    const timer = setTimeout(() => setIsLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,10 +44,19 @@ function Homepage() {
     return () => observer.disconnect();
   }, []);
 
+  if (isLoading) {
+    return (
+      <div>
+        <Navbar />
+        <LoadingSpinner />
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div>
       <Navbar />
-
       {/* Hero section */}
       <div className='hero-container'>
         <div className='hero-text'>

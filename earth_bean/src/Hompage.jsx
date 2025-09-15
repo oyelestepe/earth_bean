@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from './components/LoadingSpinner';
 
 function Homepage() {
-  const [isLoading, setIsLoading] = useState(true); // loading state
+  const [isLoading, setIsLoading] = useState(true);
   const products = useSelector(state => state.cart.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function Homepage() {
 
   useEffect(() => {
     // Simulate loading
-    const timer = setTimeout(() => setIsLoading(false), 1000);
+    const timer = setTimeout(() => setIsLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -29,6 +29,7 @@ function Homepage() {
       (entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
+            console.log('Process section visible:', entry.target);
             entry.target.classList.add('visible');
             obs.unobserve(entry.target);
           }
@@ -106,7 +107,7 @@ function Homepage() {
         <h2 className='process-title'>Our Process</h2>
         <div className='process-wrapper'>
 
-          <div className='process-container fade-in' ref={el => processRef.current[0] = el}>
+          <div className='process-container fade-in visible' ref={el => processRef.current[0] = el}>
             <div className='process-text'>
               <h3>Step 1: Selecting the Finest Beans</h3>
               <p>We carefully handpick the highest quality coffee beans from sustainable farms to ensure the best flavor and aroma.</p>
@@ -116,7 +117,7 @@ function Homepage() {
             </div>
           </div>
 
-          <div className='process-container fade-in' ref={el => processRef.current[1] = el}>
+          <div className='process-container fade-in visible' ref={el => processRef.current[1] = el}>
             <div className='process-text'>
               <h3>Step 2: Drying the Beans</h3>
               <p>The beans are dried under the sun or in modern drying machines to preserve their natural taste and freshness.</p>
@@ -126,7 +127,7 @@ function Homepage() {
             </div>
           </div>
 
-          <div className='process-container fade-in' ref={el => processRef.current[2] = el}>
+          <div className='process-container fade-in visible' ref={el => processRef.current[2] = el}>
             <div className='process-text'>
               <h3>Step 3: Roasting, Grinding, and Brewing</h3>
               <p>Our experts roast the beans to perfection, grind them freshly, and brew your coffee to deliver the richest flavor.</p>

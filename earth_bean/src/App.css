@@ -71,7 +71,7 @@ body{
   background: linear-gradient(to bottom, #EFE8DE, #F3ECE3, #F7F1E9, #FAF6EF, #FDF9F3);
   overflow: hidden;
   padding: 0 5%;
-  z-index: -1;
+  /* Remove z-index: -1; */
 }
 
 .about-text {
@@ -204,6 +204,8 @@ body{
 .process-section {
   position: relative;
   padding: 60px 0;
+  padding: 40px 0;
+  z-index: 1; /* Ensure it's above any negative z-index elements */
 }
 
 .process-title {

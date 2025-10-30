@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import Navbar from './components/Navbar';
+import Hero from './components/Hero';
 import Footer from './components/Footer';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart } from './store/cartSlice';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from './components/LoadingSpinner';
+import Testimonial from './components/Testimonial';
 
 function Homepage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -48,9 +50,7 @@ function Homepage() {
   if (isLoading) {
     return (
       <div>
-        <Navbar />
         <LoadingSpinner />
-        <Footer />
       </div>
     );
   }
@@ -58,16 +58,7 @@ function Homepage() {
   return (
     <div>
       <Navbar />
-      {/* Hero section */}
-      <div className='hero-container'>
-        <div className='hero-text'>
-          <h1>Crafted from Earth, Brewed for You.</h1>
-          <h2>Sustainably sourced coffee rooted in tradition and taste.</h2>
-        </div>
-        <div className='hero-image'>
-          <img src='/hero-img.png' alt='hero' />
-        </div>
-      </div>
+      <Hero />
 
       {/* About section */}
       <div className='about-container'>
@@ -169,6 +160,7 @@ function Homepage() {
         </div>
       </section>
 
+      <Testimonial />
       <Footer />
     </div>
   );

@@ -15,17 +15,21 @@ function Homepage() {
   const products = useSelector(state => state.cart.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const processRef = useRef([]);
 
   const handleAddToCart = (id) => {
     dispatch(addToCart(id));
   };
 
-  const processRef = useRef([]);
-
   useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timer);
+    const handleLoad = () => setIsLoading(false);
+
+    if (document.readyState === 'complete') {
+      setIsLoading(false);
+    } else {
+      window.addEventListener('load', handleLoad);
+      return () => window.removeEventListener('load', handleLoad);
+    }
   }, []);
 
   useEffect(() => {
@@ -33,7 +37,6 @@ function Homepage() {
       (entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            console.log('Process section visible:', entry.target);
             entry.target.classList.add('visible');
             obs.unobserve(entry.target);
           }

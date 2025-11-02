@@ -69,7 +69,7 @@ const NUMBER_OF_BEANS = 35;
       {/* Splash Image */}
       <img
         className="absolute top-1/2 left-[65%] transform -translate-x-1/2 -translate-y-1/2 w-[70%] max-w-[1000px] z-0 opacity-70 pointer-events-none"
-        src="/coffee-splash2.png"
+        src="/coffee-splash2.webp"
         alt="Coffee Splash"
       />
 

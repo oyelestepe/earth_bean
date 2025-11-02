@@ -8,32 +8,32 @@ const processSteps = [
   {
     title: "Step 1: The Beginning",
     text: "Every journey begins with a single cherry. On sunlit coffee farms, skilled hands carefully pick ripe, red cherries at just the right moment of maturity. This careful selection ensures only the finest fruit moves forward, capturing the natural sweetness and depth that define great coffee.",
-    image: "/process1.png",
+    image: "/process1.webp",
   },
   {
     title: "Step 2: Under the Sun",
     text: "After harvesting, the cherries are gently laid out on wide drying beds to bask in the sunlight. For several days, they are turned and tended to, allowing air and warmth to draw out moisture naturally.",
-    image: "/process2.png",
+    image: "/process2.webp",
   },
   {
     title: "Step 3: Preparing for Perfection",
     text: "Once dried, the coffee beans undergo a careful transformation in the milling stage. Each batch is sorted, polished, and inspected to ensure only premium beans continue the journey.",
-    image: "/process3.png",
+    image: "/process3.webp",
   },
   {
     title: "Step 4: The Flavor Awakens",
     text: "In the roastery, the green beans meet heat and magic happens. Through precise control of time and temperature, roasters coax out deep aromas and complex flavors hidden within each bean.",
-    image: "/process4.png",
+    image: "/process4.webp",
   },
   {
     title: "Step 5: From Beans to Product",
     text: "Once roasted, the coffee is ground and sealed in air-tight bags to lock in freshness. This ensures that every cup brewed later carries the same richness intended by its makers.",
-    image: "/process5.png",
+    image: "/process5.webp",
   },
   {
     title: "Step 6: The Final Step",
     text: "Finished coffee bags are labeled and prepared for shipment to coffee lovers around the world. What began as a simple cherry now brings warmth and connection to every cup it fills.",
-    image: "/process6.png",
+    image: "/process6.webp",
   },
 ];
 

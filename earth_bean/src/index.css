@@ -1,3 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-body: "Nunito Sans", sans-serif;
+
+  /* Coffee Browns - Primary */
+  --color-coffee-900: #2C1810;
+  --color-coffee-800: #4A3525;
+  --color-coffee-700: #6F4E37;
+  --color-coffee-600: #8B5E3C;
+  --color-coffee-500: #A67C52;
+  --color-coffee-200: #E8DDD4;
+  --color-coffee-100: #F4ECE6;
+  --color-coffee-50: #FAF7F2;
+  
+  /* Cream Backgrounds */
+  --color-cream-50: #FAF7F2;
+  --color-cream-100: #F5F0EB;
+  --color-cream-200: #EDE6DC;
+  
+  /* Leaf Green - Accents */
+  --color-leaf-900: #1A3C2F;
+  --color-leaf-800: #2E5C4D;
+  --color-leaf-700: #4E6E58;
+  --color-leaf-600: #6B8576;
+  
+  /* Gold - CTA & Highlights */
+  --color-gold-600: #B8935A;
+  --color-gold-500: #C6A87C;
+  --color-gold-400: #D4B991;
+  --color-gold-300: #E5D4B5;
+  --color-gold-200: #F3EBDB;
+  --color-gold-100: #FEF3C7;
+  
+  /* Warm Accent */
+  --color-amber-500: #FBBF24;
+  --color-amber-400: #FCD34D;
+  --color-amber-100: #FEF3C7;
+}
+
+:root {
+  background-color: var(--color-cream-50);
+  color: var(--color-coffee-900);
+  font-family: var(--font-body);
+}
+
+/* Smooth transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Utility classes */
+.section-padding {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+.container-custom {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-coffee-600);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-coffee-700);
+}

@@ -25,7 +25,6 @@ const NUMBER_OF_BEANS = 35;
       const randomX = (Math.random() - 0.5) * 400;
       const randomRot = Math.random() * 360 - 180;
       const randomDelay = Math.random() * 0.3;
-      const randomY = sectionHeight + Math.random() * 200;
 
       tl.fromTo(
         bean,

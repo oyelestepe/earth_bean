@@ -24,9 +24,9 @@ const testimonials = [
 
 const Testimonial = () => {
   return (
-    <section className="bg-gradient-to-b from-[#f4ede4] to-[#e0d3c2] py-20 px-6">
+    <section className="bg-cream-100 py-24 px-6 border-t border-coffee-50">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#4e2b1a] mb-10">
+        <h2 className="text-3xl md:text-4xl font-serif font-bold text-coffee-900 mb-12">
           What Our Customers Say
         </h2>
 
@@ -34,21 +34,21 @@ const Testimonial = () => {
           {testimonials.map((item, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col justify-between text-left"
+              className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 p-8 flex flex-col justify-between text-left border border-coffee-50"
             >
-              <Quote className="text-[#c7a45a] w-10 h-10 mb-4" />
-              <p className="text-gray-700 italic mb-6 leading-relaxed">
+              <Quote className="text-gold-500 w-10 h-10 mb-6" />
+              <p className="text-coffee-700 italic mb-8 leading-relaxed text-lg font-light">
                 “{item.quote}”
               </p>
 
               <div>
-                <div className="flex text-[#c7a45a] mb-2">
+                <div className="flex text-gold-500 mb-3 gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} fill="#c7a45a" className="w-5 h-5" />
+                    <Star key={i} fill="currentColor" className="w-4 h-4" />
                   ))}
                 </div>
-                <p className="font-semibold text-[#4e2b1a]">{item.author}</p>
-                <p className="text-sm text-gray-500">{item.role}</p>
+                <p className="font-bold text-coffee-900 font-serif text-lg">{item.author}</p>
+                <p className="text-sm text-coffee-600">{item.role}</p>
               </div>
             </div>
           ))}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateQuantity, setCartOpen } from '../store/cartSlice';
 import { useNavigate } from 'react-router-dom'
@@ -171,7 +172,7 @@ function Navbar() {
         </AnimatePresence>
 
         {/* Modal */}
-        {modalProduct && (
+        {modalProduct && createPortal(
           <div className='fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm'>
             <div className='bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full mx-4'>
               <h4 className="font-serif text-xl text-coffee-900 mb-2">Remove Item?</h4>
@@ -187,7 +188,8 @@ function Navbar() {
                 </button>
               </div>
             </div>
-          </div>
+          </div>,
+          document.body
         )}
       </div>
     </nav>
